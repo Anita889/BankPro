@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Account paying</title>
+  <style>
+    .btn{
+      background: #ccc;
+      padding: 15px;
+      font-size: 30px;
+      display: flex;
+      justify-content: center;
+      width: 15%;
+      margin: 0 auto;
+      transition: .5s;
+      cursor: pointer;
+    }
+
+    .btn:hover{
+      background: #26b4ec;
+    }
+
+  </style>
+</head>
+<body>
+<form  method="get" role="form" th:action="@{/bank/payment/check}" th:object="${card}">
+  <h1>Account  paying</h1>
+  <p><strong>Account=</strong> <span th:text="${card.account}"></span></p>
+</form>
+<a type="submit" class="btn btn-primary" th:href="@{/bank}">Restart</a></h1>
+</body>
+</html>

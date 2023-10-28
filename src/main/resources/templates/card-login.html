@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card-Login</title>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    input {
+      border-radius: 20px;
+      border: 2px solid #26b4ec;
+      padding: 10px;
+    }
+
+    .btn {
+      padding: 8px;
+      border: 1px solid #00fffb;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+
+    .btn:hover {
+      background: #26b4ec;
+      border-radius: 15px;
+    }
+
+    h1 {
+      font-size: 60px;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h1>Login</h1>
+  <form th:action="@{/bank/card-login} " method="post">
+    <div class="form-group">
+      <h1>
+        <label for="email">CardEmail:</label>
+        <input type="email" id="email" name="email" required>
+      </h1>
+    </div>
+    <div class="form-group">
+      <h1>
+        <label for="password">CardPassword:</label>
+        <input type="password" id="password" name="password" required>
+      </h1>
+    </div>
+    <a th:href="@{/bank/card-register}" type="submit" class="btn btn-black">Don't have card? Register here.</a>
+    <a th:href="@{/bank/payment}" type="submit" value="Log in" class="btn btn-secondary">Login card</a>
+  </form>
+</div>
+</body>
+</html>

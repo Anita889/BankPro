@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Bank Start</title>
+
+    <style>
+        .card{
+            font-size: 65px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn{
+            background: #ccc;
+            padding: 15px;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            width: 15%;
+            margin: 0 auto;
+            transition: .5s;
+            cursor: pointer;
+        }
+
+        .btn:hover{
+            background: #26b4ec;
+        }
+
+    </style>
+</head>
+<body>
+<div class="card">
+    <p>Hello!!!! Lets start our bank work</p>
+</div>
+<a type="submit" class="btn btn-primary" th:href="@{/bank/user-login}">Start button</a>
+<a type="submit" class="btn btn-primary" th:href="@{/bank/card-login}">Continue</a>
+</body>
+</html>

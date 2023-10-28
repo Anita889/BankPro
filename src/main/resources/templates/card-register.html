@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Card-Register</title>
+  <style>
+    input {
+      border-radius: 20px;
+      border: 2px solid #26b4ec;
+      padding: 10px;
+    }
+
+    .btn {
+      padding: 8px;
+      border: 1px solid #00fffb;
+      cursor: pointer;
+      transition: 0.5s;
+    }
+
+    .btn:hover {
+      background: #26b4ec;
+      border-radius: 15px;
+    }
+
+    h1 {
+      font-size: 60px;
+      display: flex;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+<form  method="post" role="form" th:action="@{/bank/card-register}" th:object="${card}">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <h1>
+        <label>Name</label>
+        <label>
+          <input type="text" class="form-control" th:field="*{name}"  placeholder="Name">
+        </label>
+      </h1>
+    </div>
+    <div class="form-group col-md-6">
+      <h1>
+        <label>Surname</label>
+        <label>
+          <input type="text" class="form-control" th:field="*{surname}"  placeholder="Surname">
+        </label>
+      </h1>
+    </div>
+    <div class="form-group col-md-6">
+      <h1>
+        <label>Email</label>
+        <label>
+          <input type="email" class="form-control" th:field="*{email}"  placeholder="Email">
+        </label>
+      </h1>
+    </div>
+    <div class="form-group col-md-6">
+      <h1>
+        <label>Password</label>
+        <label>
+          <input type="password" class="form-control" th:field="*{password}"  placeholder="Password">
+        </label>
+      </h1>
+    </div>
+  </div>
+  <div class="form-group">
+    <h1>
+      <label>Pincode</label>
+      <label>
+        <input type="text" class="form-control" th:field="*{pincode}"  placeholder="Pincode">
+      </label>
+    </h1>
+  </div>
+  <div class="form-group">
+    <h1>
+      <label>Account</label>
+      <label>
+        <input type="number" class="form-control" th:field="*{account}"  placeholder="Account">
+      </label>
+    </h1>
+  </div>
+  <div class="form-group">
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" id="gridCheck">
+      <label class="form-check-label" for="gridCheck">
+        Check me out
+      </label>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-black">Register card!!</button>
+</form>
+</body>
+</html>
