@@ -18,11 +18,11 @@
   </style>
 </head>
 <body>
-<form  method="post" th:href="@{/bank/payment}">
+<form role="form" method="post" th:action="@{/bank/payment(id=${card.id})}" th:object="${card}">
   <div class="form-group">
     <h1>
-      <label for="email">CardEmail:</label>
-      <input type="email" id="email" name="email" required>
+      <label >Payment :</label>
+      <input type="number"  name="pay" required>
     </h1>
   </div>
 </form>

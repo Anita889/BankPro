@@ -6,33 +6,30 @@
     <title>Login</title>
 
     <style>
-        .main {
-            padding: 0px 10px;
+        input {
+            border-radius: 20px;
+            border: 2px solid #26b4ec;
+            padding: 10px;
         }
 
-        @media screen and (max-width: 450px) {
-            .login-form{
-                margin-top: 10%;
-            }
-            .register-form{
-                margin-top: 10%;
-            }
+        .btn {
+            padding: 8px;
+            border: 1px solid #00fffb;
+            cursor: pointer;
+            transition: 0.5s;
         }
-        @media screen and (min-width: 768px){
-            .main{
-                margin-left: 30%;
-            }
 
-            .sidenav{
-                width: 40%;
-                position: fixed;
-                z-index: 1;
-                top: 0;
-                left: 0;
-            }
+        .btn:hover {
+            background: #26b4ec;
+            border-radius: 15px;
         }
-    </style>
-</head>
+
+        h1 {
+            font-size: 60px;
+            display: flex;
+            align-items: center;
+        }
+    </style></head>
 <body>
 <div class="main">
     <div class="col-md-6 col-sm-12">

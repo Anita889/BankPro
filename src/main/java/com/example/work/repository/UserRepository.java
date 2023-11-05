@@ -2,9 +2,12 @@ package com.example.work.repository;
 
 import com.example.work.models.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
-public interface UserRepository extends JpaRepository<Users,Integer> {
-    Users findByEmail(String email);
+import java.util.Optional;
 
-    Users findByPassword(String password);
+public interface UserRepository extends CrudRepository<Users,Integer> {
+    Optional<Users> findByEmail(String email);
+
+    Users findByUserPassword(String password);
 }

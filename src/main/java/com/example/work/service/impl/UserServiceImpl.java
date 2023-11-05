@@ -2,7 +2,6 @@ package com.example.work.service.impl;
 
 import com.example.work.dto.UserDto;
 import com.example.work.mapping.UserMap;
-import com.example.work.models.Role;
 import com.example.work.models.Users;
 import com.example.work.repository.UserRepository;
 import com.example.work.service.UserService;
@@ -20,19 +19,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users userSave(UserDto userDto) {
-        if((Character.isUpperCase(userDto.getName().charAt(0)))
-            &&(Character.isUpperCase(userDto.getSurname().charAt(0)))
-            &&userDto.getEmail().contains("@gmail.com")
-            &&userDto.getPassword().length()==8
-            &&userRepository.findByPassword(userDto.getPassword())!=null) {
-            Users user = UserMap.dto_model_User(userDto);
-            return userRepository.save(user);
+        if ((Character.isUpperCase(userDto.getName().charAt(0)))
+                && (Character.isUpperCase(userDto.getSurname().charAt(0)))
+                && userDto.getEmail().contains("@gmail.com")
+                && userDto.getUserPassword().length() == 8
+                && userRepository.findByUserPassword(userDto.getUserPassword()) == null) {
+           return userRepository.save(UserMap.dto_model_User(userDto));
         }
-        else return null;
+        else
+            return null;
     }
+
     @Override
     public Users findByEmail(String email) {
-        return   userRepository.findByEmail(email);
+        return   userRepository.findByEmail(email).get();
     }
 
 }

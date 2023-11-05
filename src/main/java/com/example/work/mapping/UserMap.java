@@ -4,18 +4,32 @@ import com.example.work.dto.UserDto;
 import com.example.work.models.Role;
 import com.example.work.models.Users;
 
-public class UserMap {
-    public static Users dto_model_User(UserDto userDto){
+import java.util.stream.Collectors;
 
-        Users user=new Users();
-        user.setUserId(userDto.getId());
-        user.setSurname(userDto.getSurname());
-        user.setName(userDto.getName());
-        user.setEmail(userDto.getEmail());
-        user.setPassword(userDto.getPassword());
-        user.setCards(userDto.getCards());
-        Role role=Role.USER;
-        user.setRole(role);
-        return  user;
+public class UserMap {
+    public static Users dto_model_User(UserDto userDto) {
+        return Users.builder()
+                .id(userDto.getId())
+                .name(userDto.getName())
+                .surname(userDto.getSurname())
+                .email(userDto.getEmail())
+                .cards(userDto.getCards())
+                .role(Role.USER)
+                .userPassword(userDto.getUserPassword())
+                .build();
     }
+
+    public static UserDto model_Dto_User(Users user) {
+        return UserDto.builder()
+                .id(user.getId())
+                .name(user.getName())
+                .cards(user.getCards())
+                .role(Role.USER)
+                .surname(user.getSurname())
+                .email(user.getEmail())
+                .userPassword(user.getUserPassword())
+                .build();
+    }
+
+
 }

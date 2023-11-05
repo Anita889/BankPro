@@ -60,7 +60,7 @@
       <h1>
         <label>Password</label>
         <label>
-          <input type="password" class="form-control" th:field="*{password}"  placeholder="Password">
+          <input type="password" class="form-control" th:field="*{cardPassword}"  placeholder="Password">
         </label>
       </h1>
     </div>
@@ -89,6 +89,18 @@
       </label>
     </div>
   </div>
+  <script>
+    function checkCheckboxes() {
+      var checkbox1 = document.getElementById("checkbox1");
+      var result = document.getElementById("result");
+
+      if (checkbox1.checked) {
+        result.innerText = "All checkboxes are checked.";
+      } else {
+        result.innerText = "Not all checkboxes are checked.";
+      }
+    }
+  </script>
   <button type="submit" class="btn btn-black">Register card!!</button>
 </form>
 </body>

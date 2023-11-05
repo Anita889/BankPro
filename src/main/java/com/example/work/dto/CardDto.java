@@ -1,7 +1,5 @@
 package com.example.work.dto;
 
-
-
 import com.example.work.models.Users;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
@@ -10,19 +8,21 @@ import java.sql.Timestamp;
 
 
 @Data
+@Builder
 public class CardDto {
     private Integer id;
-    @NotEmpty
+    @NotEmpty(message = "Card name  not be empty")
     private String name;
-    @NotEmpty
+    @NotEmpty(message = "Card surname  not be empty")
     private String surname;
-    @NotEmpty
+    @NotEmpty(message = "Card email  not be empty")
     private String email;
-    @NotEmpty
-    private String password;
+    @NotEmpty(message = "Card cardPassword  not be empty")
+    private String cardPassword;
     private Long pincode;
     private Long account;
     private Timestamp start;
     private Timestamp finish;
+    @NotEmpty
     private Users user;
 }
