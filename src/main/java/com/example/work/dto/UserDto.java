@@ -21,6 +21,5 @@ public class UserDto  {
     private String email;
     @NotEmpty(message = "Card userPassword  not be empty")
     private String userPassword;
-    private Role role;
     private List<Card> cards;
 }

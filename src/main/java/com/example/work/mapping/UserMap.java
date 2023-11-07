@@ -14,7 +14,6 @@ public class UserMap {
                 .surname(userDto.getSurname())
                 .email(userDto.getEmail())
                 .cards(userDto.getCards())
-                .role(Role.USER)
                 .userPassword(userDto.getUserPassword())
                 .build();
     }
@@ -24,7 +23,6 @@ public class UserMap {
                 .id(user.getId())
                 .name(user.getName())
                 .cards(user.getCards())
-                .role(Role.USER)
                 .surname(user.getSurname())
                 .email(user.getEmail())
                 .userPassword(user.getUserPassword())

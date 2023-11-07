@@ -39,7 +39,7 @@
 <body>
 <div class="container">
   <h1>Login</h1>
-  <form th:action="@{/bank/card-login} " method="post" th:object="${card}">
+  <form th:action="@{/mywork/bank/card-login} " method="post" th:object="${card}">
     <div class="form-group">
       <h1>
         <label for="email">CardEmail:</label>
@@ -52,8 +52,8 @@
         <input type="password" id="password" name="password" required>
       </h1>
     </div>
-    <a th:href="@{/bank/card-register}" type="submit" class="btn btn-black">Don't have card? Register here.</a>
-    <a th:href="@{/bank/payment(id=${card.id})}" type="button"  value="Log in" class="btn btn-secondary">Login card</a>
+    <a th:href="@{/mywork/bank/card-register}" type="submit" class="btn btn-black">Don't have card? Register here.</a>
+    <a th:href="@{/mywork/bank/payment(id=${card.id})}" type="button"  value="Log in" class="btn btn-secondary">Login card</a>
   </form>
 </div>
 </body>

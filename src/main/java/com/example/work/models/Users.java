@@ -21,8 +21,6 @@ public class Users {
     private String surname;
     private String email;
     private String userPassword;
-    @Enumerated(EnumType.STRING)
-    private Role role;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Card> cards = new ArrayList<>();
 }
