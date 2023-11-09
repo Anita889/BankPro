@@ -1,7 +1,5 @@
 package com.example.work.service.impl;
 
-import com.example.work.dto.CardDto;
-import com.example.work.mapping.CardMap;
 import com.example.work.models.Card;
 import com.example.work.models.Users;
 import com.example.work.repository.CardRepository;

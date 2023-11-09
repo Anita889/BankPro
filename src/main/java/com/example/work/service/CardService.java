@@ -7,6 +7,7 @@ import java.util.Optional;
 
 public interface CardService  {
     Card findByPincode(Long pincode);
+
     Card saveCard(Card card);
 
     Optional<Card> findByCardId(Integer cardId);
