@@ -34,7 +34,7 @@
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-            <form method="post" th:action="@{/mywork/bank/user-login}" >
+            <form method="post" th:action="@{/api/bank/user-login}" >
                 <div>
                     <h1>
                         <label>Email:</label>
@@ -56,8 +56,8 @@
                                 name="password"/>
                     </h1>
                 </div>
-                <a th:href="@{/bank/user-register}" type="submit" class="btn btn-black">Don't have an account? Register here.</a>
-                <a th:href="@{/bank/card-login}" type="submit" value="Log in" class="btn btn-secondary">Login</a>
+                <a th:href="@{/api/bank/user-register}" type="submit" class="btn btn-black">Don't have an account? Register here.</a>
+                <a th:href="@{/api/bank/card-login}" type="submit" value="Log in" class="btn btn-secondary">Login</a>
             </form>
         </div>
     </div>

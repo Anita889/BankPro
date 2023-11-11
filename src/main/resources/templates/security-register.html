@@ -6,19 +6,19 @@
   <style>
     input {
       border-radius: 10px;
-      border: 2px solid #26b4ec;
+      border: 2px solid #c826ec;
       padding: 10px;
     }
 
     .btn {
       padding: 8px;
-      border: 1px solid #00fffb;
+      border: 1px solid #ff00c3;
       cursor: pointer;
       transition: 0.5s;
     }
 
     .btn:hover {
-      background: #26b4ec;
+      background: #8926ec;
       border-radius: 15px;
     }
 
@@ -32,9 +32,9 @@
 <div class="main">
   <div class="col-md-6 col-sm-12">
     <div class="login-form">
-      <form  method="post" th:action="@{/api/bank/user-register}" th:object="${user}">
+      <form  method="post" th:action="@{/api/register}" th:object="${register}">
         <div class="form-group col-md-6">
-     <h1><label>Email</label></h1>
+          <h1><label>Email</label></h1>
           <input type="email"
                  class="form-control"
                  th:field="*{email}"
@@ -44,21 +44,21 @@
           <h1><label>Name</label></h1>
           <input type="text"
                  class="form-control"
-                 th:field="*{name}"
+                 th:field="*{password}"
                  placeholder="Name">
         </div>
         <div class="form-group">
           <h1><label>SurName</label></h1>
           <input type="text"
                  class="form-control"
-                 th:field="*{surname}"
+                 th:field="*{firstname}"
                  placeholder="SurName">
         </div>
         <div class="form-group">
           <h1><label>Password</label></h1>
           <input type="password"
                  class="form-control"
-                 th:field="*{userPassword}"
+                 th:field="*{lastname}"
                  placeholder="Password">
         </div>
         <div class="form-group">
@@ -70,18 +70,8 @@
           </div>
         </div>
         <script>
-          function checkCheckboxes() {
-            var checkbox1 = document.getElementById("checkbox1");
-            var result = document.getElementById("result");
-
-            if (checkbox1.checked) {
-              result.innerText = "All checkboxes are checked.";
-            } else {
-              result.innerText = "Not all checkboxes are checked.";
-            }
-          }
         </script>
-        <button type="submit" class="btn btn-black">Register user!!</button>
+        <a th:href="@{/api/bank}" type="submit" class="btn btn-black">Security register!</a>
       </form>
     </div>
   </div>

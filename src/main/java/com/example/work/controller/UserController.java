@@ -20,6 +20,7 @@ import java.util.Optional;
 
 @Slf4j
 @Controller
+@RequestMapping("/api")
 public class UserController {
     private final UserService userService;
     private final CardService cardService;

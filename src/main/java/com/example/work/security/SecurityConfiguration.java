@@ -1,7 +1,10 @@
 package com.example.work.security;
 
+
+import com.example.work.models.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +19,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @RequiredArgsConstructor
 @EnableWebSecurity
@@ -31,15 +35,16 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
-                            authorize.requestMatchers("/bank/**").permitAll();
-                      //      authorize.requestMatchers("/error").permitAll();
-                            authorize.anyRequest().authenticated();
+                            authorize
+                                    .requestMatchers("/api/authenticate").permitAll()
+                                   // .requestMatchers("/error").permitAll()
+                                   .requestMatchers("/api/bank/**").hasAnyRole(Role.ADMIN.name(),Role.USER.name())
+                                   .requestMatchers("api/register").permitAll()
+                                    .anyRequest().authenticated();
                         }
                 )
-                .sessionManagement(sessionManagement -> sessionManagement
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                )
-//                .authenticationProvider(authenticationProvider);
+                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAthFilter, UsernamePasswordAuthenticationFilter.class);
 //                .logout(logout ->
 //                        logout.logoutUrl("/logout")
