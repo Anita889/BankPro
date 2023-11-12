@@ -1,5 +1,6 @@
-package com.example.work.models;
-/*
+package com.example.work.token;
+
+import com.example.work.models.Human;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,4 +32,3 @@ public class Token {
     @JoinColumn(name = "user_id")
     public Human human;
 }
-*/

@@ -1,5 +1,6 @@
 package com.example.work.security;
 
+import com.example.work.models.Human;
 import com.example.work.repository.LoginHumanRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -19,12 +22,11 @@ public class ApplicationConfiguration {
 
     private final LoginHumanRepository loginHumanRepository;
     @Bean
-    public UserDetailsService userDetailsService(){
-        return  username -> loginHumanRepository.findByEmail(username)
-                .orElseThrow(()->new UsernameNotFoundException("User not find"));
+    public UserDetailsService userDetailsService() {
+    return username -> loginHumanRepository.findByEmail(username);
     }
     @Bean
-    public AuthenticationProvider authenticationProviderBy(){
+    public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProv=new DaoAuthenticationProvider();
         authProv.setUserDetailsService(userDetailsService());
         authProv.setPasswordEncoder(passwordEncoder());

@@ -65,4 +65,11 @@ public class Human implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    public boolean isValid(){
+        return email != null
+                && firstname != null
+                && lastname != null
+                && password != null;
+    }
 }

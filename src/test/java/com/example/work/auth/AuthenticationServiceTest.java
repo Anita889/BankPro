@@ -1,6 +1,8 @@
 package com.example.work.auth;
 
 import com.example.work.models.Card;
+import com.example.work.models.Human;
+import com.example.work.models.Role;
 import com.example.work.models.Users;
 import com.example.work.repository.LoginHumanRepository;
 import com.example.work.security.JWTService;
@@ -15,8 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 
@@ -38,29 +42,38 @@ class AuthenticationServiceTest {
     @Mock
     private  AuthenticationManager authenticationManager;
     @Test
-    void register() {
-    }
+    void register() throws Exception {
+        // Given
+        RegisterRequest request = new RegisterRequest();
+        request.setFirstname("John");
+        request.setLastname("Doe");
+        request.setEmail("john.doe@example.com");
+        request.setPassword("password");
 
-    @Test
-    void authenticate() {
-        //Arrange
-        AuthenticationRequest request = new AuthenticationRequest("test@example.com", "password");
-
-        List<Card> cardList = new ArrayList<>();
-        Users mockUser = Users.builder()
-                .id(1)
-                .name("Jane")
-                .surname("Smith")
-                .email("jane@example.com")
-                .cards(cardList)
-                .userPassword("securePassword")
+        Human savedUser = Human.builder()
+                .firstname(request.getFirstname())
+                .lastname(request.getLastname())
+                .email(request.getEmail())
+                .password("encodedPassword")
+                .role(Role.USER)
                 .build();
-        String mockToken = "mockedJWTToken";
+        System.out.println(savedUser.getPassword());
+        when(passwordEncoder.encode(request.getPassword())).thenReturn("encodedPassword");
+        when(repository.save(any(Human.class))).thenReturn(savedUser);
+        when(jwtService.generateToken(any(Human.class))).thenReturn("mockedJwtToken");
 
-        when(authenticationManager.authenticate(any()));
-        when(loginHumanRepository.findByEmail(eq(request.getEmail()))).thenReturn(Optional.of(mockUser));
-        when(jwtService.generateToken((UserDetails) eq(mockUser)).
+        // When
+        AuthenticationResponse response=auth.register(request);
 
-        AuthenticationResponse response = auth.authenticate(request);
+        // Then
+        verify(passwordEncoder).encode(request.getPassword());
+        verify(repository).save(any(Human.class));
+        verify(jwtService).generateToken(savedUser);
+
+        // Add assertions for the response
+        // For example, you can assert that the generated token is not null or empty
+        assertNotNull(response.getToken());
     }
+
+
 }

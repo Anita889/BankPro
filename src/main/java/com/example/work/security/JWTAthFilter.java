@@ -19,13 +19,15 @@ import java.io.IOException;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-@Component
+
 @RequiredArgsConstructor
+@Component
 public class JWTAthFilter extends OncePerRequestFilter {
 
     private final JWTService jwtService;
 
     private final UserDetailsService userDetailService;
+
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -48,12 +50,11 @@ public class JWTAthFilter extends OncePerRequestFilter {
 
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 // Create authentication token
-                var authToken = new UsernamePasswordAuthenticationToken(
+                UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
                         userDetails,
                         null,
                         userDetails.getAuthorities()
                 );
-
                 // Set authentication details
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 

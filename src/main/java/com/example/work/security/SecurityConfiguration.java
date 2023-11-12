@@ -2,32 +2,35 @@ package com.example.work.security;
 
 
 import com.example.work.models.Role;
-import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.http.HttpMethod;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
-import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer;
-import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
-@RequiredArgsConstructor
+@Configuration
 @EnableWebSecurity
-@Component
+@EnableMethodSecurity
 public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
     private final JWTAthFilter jwtAthFilter;
 //    private final LogoutHandler logoutHandler;
+
+    @Autowired
+    public SecurityConfiguration(AuthenticationProvider authenticationProvider,JWTAthFilter jwtAthFilter){
+        this.authenticationProvider=authenticationProvider;
+        this.jwtAthFilter=jwtAthFilter;
+    }
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -36,10 +39,7 @@ public class SecurityConfiguration {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorize -> {
                             authorize
-                                    .requestMatchers("/api/authenticate").permitAll()
-                                   // .requestMatchers("/error").permitAll()
-                                   .requestMatchers("/api/bank/**").hasAnyRole(Role.ADMIN.name(),Role.USER.name())
-                                   .requestMatchers("api/register").permitAll()
+                                    .requestMatchers("/api/security/**").permitAll()
                                     .anyRequest().authenticated();
                         }
                 )
