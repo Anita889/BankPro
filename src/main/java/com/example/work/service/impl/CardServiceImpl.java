@@ -46,19 +46,16 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public Optional<Card> findByCardId(Integer cardId) {
-        Optional<Card> cardDto=cardRepository.findById(cardId);
-        return cardDto;
+        return cardRepository.findById(cardId);
     }
 
 
     @Override
-    public boolean doPayment(Optional<Card> card,Integer pay) {
+    public void doPayment(Optional<Card> card,Integer pay) {
         if(pay<=card.get().getAccount()) {
             Card cardNew=cardRepository.findByCardPassword(card.get().getCardPassword());
             cardNew.setAccount(card.get().getAccount()-pay);
-            return true;
         }
-        else  return false;
     }
 
     @Override

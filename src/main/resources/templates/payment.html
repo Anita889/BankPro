@@ -18,13 +18,14 @@
   </style>
 </head>
 <body>
-<form role="form" method="post" th:action="@{/bank/payment(id=${card.id})}" th:object="${card}">
+<form role="form" method="post" th:action="@{/api/bank/payment(id=${card.get().getId()})}" th:object="${card}">
   <div class="form-group">
     <h1>
       <label >Payment :</label>
       <input type="number"  name="pay" required>
     </h1>
   </div>
+  <button type="submit" class="btn btn-black">Pay!</button>
 </form>
 </body>
 </html>

@@ -64,13 +64,12 @@ public class UserController {
     @PostMapping("/bank/card-login")
     public String passCardLogin(@ModelAttribute("card")CardDto card)
     {
-        if(cardService.findByCardPassword(card.getCardPassword())!=null&&
-                Objects.equals(cardService.findByCardPassword(card.getCardPassword()).getCardPassword(), card.getCardPassword())) {
-                log.info("card password" + card.getCardPassword());
-            return "payment";
+        if(cardService.findByCardPassword(card.getCardPassword())!=null) {
+            return "redirect:/api/bank/payment/"+cardService.findByCardPassword(card.getCardPassword()).getId();
         }
-        else return "redirect:/bank";
+        else return "redirect:/api/bank/card-login";
     }
+
     @GetMapping("/bank/card-register")
     public String getCardRegister(Model model)
     {
@@ -91,13 +90,25 @@ public class UserController {
         return "payment";
     }
     @PostMapping("/bank/payment/{id}")
-    public String paymentMethod2(@PathVariable("id") Integer cardId,Integer pay)
+    public String paymentMethod2(@PathVariable("id") Integer cardId,@ModelAttribute("card") CardDto cardDto, Integer pay)
     {
         Optional<Card> card=cardService.findByCardId(cardId);
-        if(cardService.doPayment(card,pay))
-            return "payment-do";
-        else
-            return "payment-not-do";
+        cardService.doPayment(card,pay);
+            return "redirect:/api/bank/account-info"+cardId;
+    }
+
+    @GetMapping("/bank/account-info/{id}")
+    public String showResults(@PathVariable Integer id, Model model) {
+        Card card = cardService.findByCardId(id).orElse(null);
+
+        if (card != null) {
+            String accountInfo = "Your account is " + card.getAccount();
+            model.addAttribute("accountInfo", accountInfo);
+        } else {
+            model.addAttribute("accountInfo", "Account not found");
+        }
+
+        return "payment-do";
     }
 
 }

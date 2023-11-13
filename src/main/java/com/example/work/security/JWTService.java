@@ -68,7 +68,8 @@ public class JWTService {
                      Jwts.parser()
                          .verifyWith(Keys.hmacShaKeyFor(getSignInKey()))
                          .build()
-                         .parseSignedClaims(token).getPayload();
+                         .parseSignedClaims(token)
+                         .getPayload();
     }
 
 }
