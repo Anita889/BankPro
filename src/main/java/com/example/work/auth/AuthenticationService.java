@@ -17,6 +17,11 @@ import org.springframework.stereotype.Service;
 
 
 
+/*********************************
+ **Authentication and Registration
+ **processes service layer class
+ *********************************/
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -31,34 +36,38 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    //Registration of new visitor
-    public AuthenticationResponse register(RegisterRequest request){
-        String email=request.getEmail();
 
+    /*********************************
+     **Registration of new visitor
+     *********************************/
+    public AuthenticationResponse register(RegisterRequest request){
+        //make role field initialize
+        String email=request.getEmail();
             if (email.contains("%bank@gmail.com"))
                 request.setRole(Role.ADMIN);
             else request.setRole(Role.USER);
+        //build new user
         Human user = Human.builder()
                 .firstname(request.getFirstname())
                 .lastname(request.getLastname())
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
-                // divide you logic for roles
                 .role(request.getRole())
                 .build();
-
             repository.save(user);
-            log.info(repository.findByEmail(request.getEmail()).getEmail());
+
+            //generate jwt token and make response of http request
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .responseRole(request.getRole())
                 .build();
     }
-
-
-    // Prove of who is visitor? question (authenticate)
+     /*************************************************
+     // Prove of who is visitor? question (authenticate)
+     //************************************************/
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
+        //authenticate request
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         request.getEmail(),
@@ -66,6 +75,8 @@ public class AuthenticationService {
                 ));
         var user=repository.findByEmail(request.getEmail());
         var jwtToken = jwtService.generateToken(user);
+
+        //generate jwt token and make response of http request
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .responseRole(user.getRole())

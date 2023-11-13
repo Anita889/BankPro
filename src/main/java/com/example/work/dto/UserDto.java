@@ -9,6 +9,9 @@ import lombok.Data;
 import java.util.List;
 
 
+/*************************************
+ * User model class Data Transfer class
+ **************************************/
 @Data
 @Builder
 public class UserDto  {

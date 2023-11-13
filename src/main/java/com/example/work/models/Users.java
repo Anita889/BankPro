@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/******************
+ * Card model class
+ ******************/
 @Entity
 @Data
 @Builder

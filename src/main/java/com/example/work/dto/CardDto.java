@@ -6,6 +6,9 @@ import lombok.*;
 
 import java.sql.Timestamp;
 
+/*************************************
+ * Card model class Data Transfer class
+ **************************************/
 
 @Data
 @Builder

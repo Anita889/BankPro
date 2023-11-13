@@ -12,15 +12,23 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
+/*****************************************
+ * Authentication configuration layer class
+ *****************************************/
 @Configuration
 @RequiredArgsConstructor
 public class ApplicationConfiguration {
 
     private final LoginHumanRepository loginHumanRepository;
+
+    //get UserDetailsService marking UserDetails/Human(our security model) object as BEAN
     @Bean
     public UserDetailsService userDetailsService() {
-    return username -> loginHumanRepository.findByEmail(username);
+    return loginHumanRepository::findByEmail;
     }
+
+    //provide AuthenticationProvider marking (DaoAuthenticationProvider object) for authentication as BEAN
     @Bean
     public AuthenticationProvider authenticationProvider(){
         DaoAuthenticationProvider authProv=new DaoAuthenticationProvider();
@@ -29,10 +37,14 @@ public class ApplicationConfiguration {
         return authProv;
     }
 
+    //provide AuthenticationManager marking for authentication manage as BEAN
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
+
+
+    //provide PasswordEncoder marking (BCryptPasswordEncoder object) for encode as BEAN
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();

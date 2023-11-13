@@ -6,9 +6,9 @@ import com.example.work.repository.CardRepository;
 import com.example.work.repository.UserRepository;
 import com.example.work.service.CardService;
 import lombok.extern.slf4j.Slf4j;
+import org.hibernate.service.NullServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.Optional;
 
 @Slf4j
@@ -52,10 +52,15 @@ public class CardServiceImpl implements CardService {
 
     @Override
     public void doPayment(Optional<Card> card,Integer pay) {
-        if(pay<=card.get().getAccount()) {
-            Card cardNew=cardRepository.findByCardPassword(card.get().getCardPassword());
-            cardNew.setAccount(card.get().getAccount()-pay);
+        if(card.isPresent()) {
+              if(pay<=card.get().getAccount().intValue()) {
+                Card cardNew=cardRepository.findByCardPassword(card.get().getCardPassword());
+                cardNew.setAccount(card.get().getAccount()-pay);
+                cardRepository.save(cardNew);
+            }
         }
+        else
+            throw new NullServiceException(Card.class);
     }
 
     @Override

@@ -34,7 +34,7 @@
 <div class="main">
     <div class="col-md-6 col-sm-12">
         <div class="login-form">
-            <form method="post" th:action="@{/api/bank/user-login}" >
+            <form method="post" th:action="@{/api/bank/user-login}" th:object="${user}" >
                 <div>
                     <h1>
                         <label>Email:</label>
@@ -42,6 +42,7 @@
                                 id="email"
                                 type="email"
                                 class="form-control"
+                                th:field="*{email}"
                                 placeholder="Email"
                                 name="email"/>
                     </h1>
@@ -51,13 +52,14 @@
                         <label>Password:</label>
                         <input  id="password"
                                 type="password"
+                                th:field="*{userPassword}"
                                 class="form-control"
                                 placeholder="Password"
                                 name="password"/>
                     </h1>
                 </div>
                 <a th:href="@{/api/bank/user-register}" type="submit" class="btn btn-black">Don't have an account? Register here.</a>
-                <a th:href="@{/api/bank/card-login}" type="submit" value="Log in" class="btn btn-secondary">Login</a>
+                <button type="submit" class="btn btn-black">User Log in</button>
             </form>
         </div>
     </div>

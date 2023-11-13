@@ -19,7 +19,9 @@ import java.io.IOException;
 
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 
-
+/******************************************************
+ * OncePerRequestFilter class usage for JWT Filter class
+********************************************************/
 @RequiredArgsConstructor
 @Component
 public class JWTAthFilter extends OncePerRequestFilter {
@@ -28,6 +30,7 @@ public class JWTAthFilter extends OncePerRequestFilter {
 
     private final UserDetailsService userDetailService;
 
+    //this is one filter,witch make http request-response
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request,
@@ -43,6 +46,7 @@ public class JWTAthFilter extends OncePerRequestFilter {
         }
 
         jwt = authHeader.substring(7);
+        //extract claims
         userEmail = jwtService.extractUsername(jwt);
 
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {

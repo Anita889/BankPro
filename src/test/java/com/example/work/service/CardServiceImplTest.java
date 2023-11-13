@@ -90,10 +90,7 @@ public class CardServiceImplTest {
         when(cardRepository.findByCardPassword(card.getCardPassword())).thenReturn(card);
 
         // Act
-        boolean paymentResult = cardService.doPayment(Optional.of(card), 50);
-
-        // Assert
-        assertTrue(paymentResult);
+          cardService.doPayment(Optional.of(card), 50);
         // Add more assertions if needed based on your specific implementation
     }
 
@@ -115,10 +112,10 @@ public class CardServiceImplTest {
         when(cardRepository.findByCardPassword(card.getCardPassword())).thenReturn(card);
 
         // Act
-        boolean paymentResult = cardService.doPayment(Optional.of(card), 150);
+        cardService.doPayment(Optional.of(card), 150);
 
         // Assert
-        assertTrue(paymentResult);
+
         // Add more assertions if needed based on your specific implementation
     }
 

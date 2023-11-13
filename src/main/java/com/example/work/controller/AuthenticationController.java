@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
+/**=============================
+ * Controller of security paths
+ ===============================*/
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/security")

@@ -1,13 +1,14 @@
 package com.example.work.models;
 
 import jakarta.persistence.*;
-
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 import java.sql.Timestamp;
 
+/*************************
+ * Card model class  class
+ *************************/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

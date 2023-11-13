@@ -6,6 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/*********************************
+ **Registration request model-class
+ ************************************/
 @Data
 @Builder
 @AllArgsConstructor
