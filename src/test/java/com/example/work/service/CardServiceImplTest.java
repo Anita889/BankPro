@@ -35,6 +35,7 @@ public class CardServiceImplTest {
 
     @Test
     void testSaveCardValidCard() {
+
         // Arrange
         Card cardToSave = Card.builder()
                 .id(1)
@@ -90,7 +91,7 @@ public class CardServiceImplTest {
         when(cardRepository.findByCardPassword(card.getCardPassword())).thenReturn(card);
 
         // Act
-          cardService.doPayment(Optional.of(card), 50);
+          cardService.doPayment(card, 50L);
         // Add more assertions if needed based on your specific implementation
     }
 
@@ -112,7 +113,7 @@ public class CardServiceImplTest {
         when(cardRepository.findByCardPassword(card.getCardPassword())).thenReturn(card);
 
         // Act
-        cardService.doPayment(Optional.of(card), 150);
+        cardService.doPayment((card), 150L);
 
         // Assert
 

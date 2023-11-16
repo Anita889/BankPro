@@ -11,7 +11,7 @@ public interface CardService  {
 
     Optional<Card> findByCardId(Integer cardId);
 
-    void doPayment(Optional<Card> card,Integer pay);
+    void doPayment(Card card,Long pay);
 
     Card findByCardPassword(String cardPassword);
 }

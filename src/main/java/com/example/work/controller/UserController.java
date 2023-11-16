@@ -122,11 +122,11 @@ public class UserController {
 
     //make payment and update that row
     @PostMapping("/bank/payment/{id}")
-    public String paymentMethod2(@PathVariable("id") Integer cardId,@ModelAttribute("card") CardDto cardDto, Integer pay)
+    public String paymentMethod2(@PathVariable("id") Integer cardId,@ModelAttribute("card") CardDto cardDto, Long pay)
     {
-        Optional<Card> card=cardService.findByCardId(cardId);
+        Card card= cardService.findByCardId(cardId).isPresent()?cardService.findByCardId(cardId).get():null;
         cardService.doPayment(card,pay);
-            return "redirect:/api/bank/account-info/"+cardId;
+        return "redirect:/api/bank/account-info/"+cardId;
     }
 
     //show account info

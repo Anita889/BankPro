@@ -38,16 +38,15 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(authorize -> {
                             authorize
                                     .requestMatchers("/api/security/**").permitAll()
-                                    .requestMatchers("/api/bank","/api/bank/**").hasRole(Role.USER.name())
                                     .requestMatchers("/error").permitAll()
-                                    .requestMatchers("/api/bank").hasRole(Role.ADMIN.name())
+                                    .requestMatchers("/api/**").permitAll()
+                                    .requestMatchers("/api/bank", "/api/bank/**").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
                                     .anyRequest().authenticated();
                         }
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAthFilter, UsernamePasswordAuthenticationFilter.class);
-
         return http.build();
     }
 }

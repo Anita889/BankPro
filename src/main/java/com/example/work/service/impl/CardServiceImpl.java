@@ -51,16 +51,13 @@ public class CardServiceImpl implements CardService {
 
 
     @Override
-    public void doPayment(Optional<Card> card,Integer pay) {
-        if(card.isPresent()) {
-              if(pay<=card.get().getAccount().intValue()) {
-                Card cardNew=cardRepository.findByCardPassword(card.get().getCardPassword());
-                cardNew.setAccount(card.get().getAccount()-pay);
+    public void doPayment(Card card,Long pay) {
+              if(pay<=card.getAccount()) {
+                Card cardNew=cardRepository.findByCardPassword(card.getCardPassword());
+                cardNew.setAccount(card.getAccount()-pay);
                 cardRepository.save(cardNew);
+                log.info("yes");
             }
-        }
-        else
-            throw new NullServiceException(Card.class);
     }
 
     @Override

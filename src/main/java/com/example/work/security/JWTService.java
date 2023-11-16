@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import java.util.Date;
@@ -17,6 +18,7 @@ import java.util.function.Function;
  ************************/
 
 @Service
+@Slf4j
 public class JWTService {
     private final static String
             SECRET_KEY="404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";

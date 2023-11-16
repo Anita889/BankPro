@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/api/security")
 public class AuthenticationController {
-    private final AuthenticationService service;
 
+    private final AuthenticationService service;
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
              @RequestBody RegisterRequest request

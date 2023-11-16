@@ -14,9 +14,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class AuthenticationServiceTest {
@@ -27,7 +24,6 @@ class AuthenticationServiceTest {
 
     @Mock
     private  PasswordEncoder passwordEncoder;
-
 
     @Mock
     private  JWTService jwtService;
